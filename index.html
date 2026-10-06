@@ -48,6 +48,7 @@
             overflow: hidden;
             text-align: center;
             transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
         }
 
         .card:hover {
@@ -56,22 +57,21 @@
             border-color: #007acc;
         }
 
-        .photo-link {
+        .photo-wrapper {
             display: block;
-            cursor: pointer;
             overflow: hidden;
             height: 220px;
             background-color: #1a1a1a;
         }
 
-        .photo-link img {
+        .photo-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s;
         }
 
-        .photo-link:hover img {
+        .card:hover .photo-wrapper img {
             transform: scale(1.05);
         }
 
@@ -114,6 +114,63 @@
             border: 2px solid #ffffff;
             background-color: #252526;
         }
+
+        /* Стили для всплывающего окна (Модального окна) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #252526;
+            border: 1px solid #007acc;
+            border-radius: 12px;
+            padding: 25px;
+            max-width: 500px;
+            width: 90%;
+            color: #d4d4d4;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #858585;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #ffffff;
+        }
+
+        .modal-name {
+            color: #569cd6;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .modal-text {
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -121,42 +178,46 @@
     <div class="main-content">
         <h1>Команда стримеров: "Down crew"</h1>
 
-                    <div class="grid-container">
+        <div class="grid-container">
 
-            <div class="card">
-                <a class="photo-link" href="https://instagram.com" target="_blank" title="Перейти к биографии dangerlyoha">
+            <!-- Карточка Лёхи -->
+            <div class="card" onclick="openModal('dangerlyoha', 'Алексей Шпак (Шарф)', 'Популярный российский стример на платформе Twitch. Является организатором и идейным вдохновителем совместных «стримзабегов» и марафонов. Известен своей харизмой, весёлым стилем общения, игрой в кооперативные игры со своими друзьями и преданным сообществом.')">
+                <div class="photo-wrapper">
                     <img src="lyoha.jpg" alt="dangerlyoha">
-                </a>
+                </div>
                 <div class="info">
                     <p class="name">dangerlyoha</p>
                     <p class="role">Алексей Шпак (Шарф)</p>
                 </div>
             </div>
 
-            <div class="card">
-                <a class="photo-link" href="https://instagram.com"" target="_blank" title="Перейти к биографии morphe_ya">
+            <!-- Карточка Морфи -->
+            <div class="card" onclick="openModal('morphe_ya', 'Валерия Высоцкая (Морфи)', 'Известная стримерша, которая регулярно участвует в игровых эфирах вместе с Лёхой и компанией. Специализируется на разнообразных мультиплеерных проектах. Любит игры, корейскую культуру, отличается позитивной энергетикой и активным общением с чатом.')">
+                <div class="photo-wrapper">
                     <img src="morda.jpg" alt="morphe_ya">
-                </a>
+                </div>
                 <div class="info">
                     <p class="name">morphe_ya</p>
                     <p class="role">Валерия Высоцкая (Морфи)</p>
                 </div>
             </div>
 
-            <div class="card">
-                <a class="photo-link" href="https://instagram.com"" target="_blank" title="Перейти к биографии murzofix">
+            <!-- Карточка Мурзика -->
+            <div class="card" onclick="openModal('murzofix', 'Аркадий Алехно (Мурзик)', 'Постоянный участник и незаменимый тиммейт в этой команде стримеров. Отлично дополняет любой стрим своим юмором и ироничными комментариями. Играет во множество кооперативных игр, шутеров и симуляторов.')">
+                <div class="photo-wrapper">
                     <img src="murz.jpg" alt="murzofix">
-                </a>
+                </div>
                 <div class="info">
                     <p class="name">murzofix</p>
                     <p class="role">Аркадий Алехно (Мурзик)</p>
                 </div>
             </div>
 
-            <div class="card">
-                <a class="photo-link" href="https://instagram.com" target="_blank" title="Перейти к биографии steepkop">
+            <!-- Карточка Стипкопа -->
+            <div class="card" onclick="openModal('steepkop', 'Данил Копстипов (Бэн)', 'Яркий представитель стримерского круга, чьи шутки и реакции регулярно залетают в нарезки лучших моментов на YouTube. Участвует во всех крупных совместных прохождениях, создавая неповторимую ламповую атмосферу.')">
+                <div class="photo-wrapper">
                     <img src="kopster.jpg" alt="steepkop">
-                </a>
+                </div>
                 <div class="info">
                     <p class="name">steepkop</p>
                     <p class="role">Данил Копстипов (Бэн)</p>
@@ -166,10 +227,34 @@
         </div>
     </div>
 
+    <!-- Элемент модального окна -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal(event)">&times;</button>
+            <h2 class="modal-name" id="modalName">Имя стримера</h2>
+            <h3 id="modalRole" style="color: #858585; font-size: 1rem; margin-bottom: 15px;">Настоящее имя</h3>
+            <p class="modal-text" id="modalText">Биография стримера...</p>
+        </div>
+    </div>
+
     <footer>
-        <img class="author-avatar" src="ya.jpg" alt="Фото автора">
+        <img class="author-avatar" src="https://github.io" alt="Фото автора">
         <span>Автор проекта: <strong>Петряшов Андрей</strong></span>
     </footer>
+
+    <!-- Скрипт для открытия и закрытия окон -->
+    <script>
+        function openModal(nickname, realName, biography) {
+            document.getElementById('modalName').innerText = nickname;
+            document.getElementById('modalRole').innerText = realName;
+            document.getElementById('modalText').innerText = biography;
+            document.getElementById('modalOverlay').style.display = 'flex';
+        }
+
+        function closeModal(event) {
+            document.getElementById('modalOverlay').style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>
